@@ -31,4 +31,11 @@ public class Person {
 	/*cosntructor vacio para usarlo en formularios */
 	public Person() {}
 
+	@Override
+	public String toString() {
+		return "Person [name=" + name + ", age=" + age + "]";
+	}
+	
+	
+
 }
