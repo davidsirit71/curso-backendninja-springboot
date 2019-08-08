@@ -22,7 +22,7 @@ public class ExampleController2 {
 	
 	@Autowired							// indica a spring que inyectamos un componente en memoria
 	@Qualifier("exampleComponent")		//indica a spring nombre del beam que esta en su memoria tal como esta en @Component
-	private ExampleComponent exampleComponent;
+	private ExampleComponent exampleComponent;	//esto declara el componete para usarlo
 	
 	// Primera forma de retornar plantilla: usada cuando se insertan pocos datos
 	
