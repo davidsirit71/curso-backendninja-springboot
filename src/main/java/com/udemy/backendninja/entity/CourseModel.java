@@ -51,4 +51,12 @@ public class CourseModel {
 		this.hours = hours;
 	}
 
+	@Override
+	public String toString() {
+		return "CourseModel [name=" + name + ", description=" + description + ", price=" + price + ", hours=" + hours
+				+ "]";
+	}
+	
+	
+
 }

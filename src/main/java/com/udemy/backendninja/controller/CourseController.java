@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.udemy.backendninja.entity.Course;
+//import com.udemy.backendninja.entity.Course; // ya no usa entidades
+import com.udemy.backendninja.entity.CourseModel;
 import com.udemy.backendninja.service.CourseService;
 
 
@@ -31,15 +32,15 @@ public class CourseController {
 	public ModelAndView listAllCourses() {
 		LOG.info("Call: " + "listAllCourses()");
 		ModelAndView mav = new ModelAndView(COURSES_VIEW);
-		mav.addObject("course", new Course());  // este objeto se crea para que thymeleaf pueda trabajar en el formulario
+		mav.addObject("course", new CourseModel());  // este objeto se crea para que thymeleaf pueda trabajar en el formulario
 		mav.addObject("courses", courseService.listAllCourses());
 		return mav;		
 	}
 	
 	@PostMapping("/addcourse")
-	public String addCourse(@ModelAttribute("course") Course course) {
-		LOG.info("Call: " + "addCourse()" + " -- Param: " + course.toString());
-		courseService.addCourse(course);
+	public String addCourse(@ModelAttribute("course") CourseModel courseModel) {
+		LOG.info("Call: " + "addCourse()" + " -- Param: " + courseModel.toString());
+		courseService.addCourse(courseModel);
 		return "redirect:/courses/listcourses";
 	}
 

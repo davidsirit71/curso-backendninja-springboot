@@ -1,5 +1,6 @@
 package com.udemy.backendninja.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.udemy.backendninja.converter.CourseConverter;
 import com.udemy.backendninja.entity.Course;
+import com.udemy.backendninja.entity.CourseModel;
 import com.udemy.backendninja.repository.CourseJpaRepository;
 import com.udemy.backendninja.service.CourseService;
 
@@ -20,17 +23,31 @@ public class CourseServiceImpl implements CourseService{
 	@Autowired
 	@Qualifier("courseJpaRepository")
 	private CourseJpaRepository courseJpaRepository;
+	
+	@Autowired
+	@Qualifier("courseConverter")
+	private CourseConverter courseConverter;
 
 	@Override
-	public List<Course> listAllCourses() {
+	public List<CourseModel> listAllCourses() {
 		LOG.info("Call: " + "listAllCourses()");
-		return courseJpaRepository.findAll();
+		List<CourseModel> listCourseOut = new ArrayList<CourseModel>();
+		List<Course> listCourseEntity = courseJpaRepository.findAll();
+		
+		for(Course course: listCourseEntity) {
+			listCourseOut.add(courseConverter.entity2model(course));
+		}
+		return listCourseOut;
 	}
 
 	@Override
-	public Course addCourse(Course course) {
+	public CourseModel addCourse(CourseModel courseModel) {
 		LOG.info("Call: " + "addCourse()");
-		return courseJpaRepository.save(course);
+		Course courseEntity = courseConverter.model2entity(courseModel);		
+		Course courseEntityRet = new Course();
+		courseEntityRet = courseJpaRepository.save(courseEntity);
+		CourseModel courseModelret = courseConverter.entity2model(courseEntityRet);		
+		return courseModelret; 
 	}
 
 	@Override
@@ -40,8 +57,11 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public Course updateCourse(Course course) {
-		return courseJpaRepository.save(course);
+	public CourseModel updateCourse(CourseModel courseModel) {
+		Course courseEntity = courseConverter.model2entity(courseModel);
+		Course courseEntityRet = courseJpaRepository.save(courseEntity);
+		CourseModel courseModelret = courseConverter.entity2model(courseEntityRet);			
+		return courseModelret;
 	}
 
 }
