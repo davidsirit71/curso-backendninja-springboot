@@ -3,6 +3,7 @@ package com.udemy.backendninja.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,8 +12,8 @@ import javax.persistence.Table;
 public class Course {
 
 	@Id
-	@GeneratedValue
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)  // es importante strategy el valor para evitar que se genere el error
+	@Column(name="id")								 //JPA: SQL Error: 1062, SQLState: 23000 ERROR: Duplicate entry:	
 	private int id;
 	
 	@Column(name="name")
