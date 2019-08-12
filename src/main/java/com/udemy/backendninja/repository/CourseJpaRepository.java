@@ -22,5 +22,7 @@ public interface CourseJpaRepository extends JpaRepository<Course, Serializable>
 	public abstract List<Course> findByNameOrderByHours (String name);
 	
 	public abstract Course findByNameOrPrice(String name, int price);	
+	
+	public abstract Course findById(int id);
 
 }

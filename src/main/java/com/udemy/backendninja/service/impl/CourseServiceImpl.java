@@ -52,6 +52,13 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	public int removeCourse(int id) {
+		LOG.info("Call: " + "removeCourse()");
+		Course courseEntityToDelete = courseJpaRepository.findById(id);
+		if (courseEntityToDelete != null) {
+			
+		} else {
+
+		}
 		courseJpaRepository.deleteById(id);
 		return 0;
 	}
