@@ -60,6 +60,14 @@ public class Contact {
 		this.city = city;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Contact(String firstname, String lastname, String telephone, String city) {
 		super();
 		this.firstname = firstname;
