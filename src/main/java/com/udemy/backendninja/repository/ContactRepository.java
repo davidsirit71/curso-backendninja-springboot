@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.udemy.backendninja.entity.Contact;
 
+
+// se importa JpaRepository para tener todos los metodos disponibles de JPA
 @Repository("contactRepository")
 public interface ContactRepository extends JpaRepository<Contact, Serializable>{
 
