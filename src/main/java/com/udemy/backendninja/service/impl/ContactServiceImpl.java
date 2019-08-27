@@ -44,6 +44,11 @@ public class ContactServiceImpl implements ContactService{
 	public Contact findContactById(int id) {
 		return contactRepository.findById(id);
 	}
+	
+	@Override
+	public ContactModel findContactByIdModel(int id) {
+		return contactConverter.convertContac2ContactModel(findContactById(id));
+	}
 
 	@Override
 	public void removeContact(int id) {

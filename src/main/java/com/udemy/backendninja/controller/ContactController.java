@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.udemy.backendninja.constant.ViewConstant;
+import com.udemy.backendninja.entity.Contact;
 import com.udemy.backendninja.model.ContactModel;
 import com.udemy.backendninja.service.ContactService;
 
@@ -34,8 +35,13 @@ public class ContactController {
 	}
 	
 	@GetMapping("/contactform")
-	public String redirectContactForm(Model model) {
-		model.addAttribute("contactModel", new ContactModel());
+	public String redirectContactForm(@RequestParam(name="id", required =false) int id,
+			Model model) {
+		ContactModel contactModel = new ContactModel();
+		if(id != 0) {
+			contactModel = contactService.findContactByIdModel(id);
+		}
+		model.addAttribute("contactModel", contactModel);
 		return ViewConstant.CONTAC_FORM;
 	}
 	
