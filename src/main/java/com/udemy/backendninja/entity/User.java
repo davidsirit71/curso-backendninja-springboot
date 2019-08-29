@@ -25,7 +25,7 @@ public class User {
 	private boolean enable;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<UserRole> userRoles = new HashSet<UserRole>();
+	private Set<UserRole> userRole = new HashSet<UserRole>();
 
 	public User(String username, String password, boolean enable) {
 		super();
@@ -34,12 +34,12 @@ public class User {
 		this.enable = enable;
 	}
 
-	public User(String username, String password, boolean enable, Set<UserRole> userRoles) {
+	public User(String username, String password, boolean enable, Set<UserRole> userRole) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.enable = enable;
-		this.userRoles = userRoles;
+		this.userRole = userRole;
 	}
 
 	public User() {
@@ -69,12 +69,12 @@ public class User {
 		this.enable = enable;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
+	public Set<UserRole> getUserRole() {
+		return userRole;
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setUserRole(Set<UserRole> userRole) {
+		this.userRole = userRole;
 	}
 	
 	
