@@ -21,24 +21,24 @@ public class User {
 	@Column(name = "password", nullable = false, length = 60)  // en BD siempre se almacena con 60 caracteres necesarios para cifrar
 	private String password;
 	
-	@Column(name = "enable", nullable = false)
-	private boolean enable;
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<UserRole> userRole = new HashSet<UserRole>();
 
 	public User(String username, String password, boolean enable) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.enable = enable;
+		this.enabled = enable;
 	}
 
 	public User(String username, String password, boolean enable, Set<UserRole> userRole) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.enable = enable;
+		this.enabled = enable;
 		this.userRole = userRole;
 	}
 
@@ -61,12 +61,12 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean isEnable() {
-		return enable;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setEnable(boolean enable) {
-		this.enable = enable;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Set<UserRole> getUserRole() {

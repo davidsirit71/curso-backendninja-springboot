@@ -28,20 +28,16 @@ public class UserService implements UserDetailsService {
 	// este metodo se sobreescribe y viene de la interfaz de spring framwork
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
 		com.udemy.backendninja.entity.User user = userRepository.findByUsername(username);
 		List<GrantedAuthority> authorities = buildAuthorities(user.getUserRole());
-
 		return buildUser(user, authorities);
 	}
 
 	// metodo necesario para tranformar nuestro usuario a usuario spring
 	private User buildUser(com.udemy.backendninja.entity.User user, List<GrantedAuthority> authorities) {
-
-		return new User(user.getUsername(), user.getPassword(), user.isEnable(), true, true, true, authorities); // accountNonExpired,
-																													// credentialsNonExpired,
-																													// accountNonLocked,
-																													// se dejan a true
+		return new User(user.getUsername(), user.getPassword(), user.isEnabled(), 
+				true, true, true, authorities); // accountNonExpired, credentialsNonExpired, accountNonLocked,
+												// se dejan a true
 
 	}
 
@@ -49,9 +45,11 @@ public class UserService implements UserDetailsService {
 	// los roles de usuario
 	private List<GrantedAuthority> buildAuthorities(Set<UserRole> userRoles) {
 		Set<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
+		
 		for (UserRole userRole : userRoles) {
 			auths.add(new SimpleGrantedAuthority(userRole.getRole()));
 		}
+		
 		return new ArrayList<GrantedAuthority>(auths);
 	}
 
