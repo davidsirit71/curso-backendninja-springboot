@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.udemy.backendninja.constant.ViewConstant;
-import com.udemy.backendninja.entity.Contact;
 import com.udemy.backendninja.model.ContactModel;
 import com.udemy.backendninja.service.ContactService;
 
@@ -37,8 +36,8 @@ public class ContactController {
 		return "redirect:/contacts/showcontacts";
 	}
 	
-	// @PreAuthorize("permitAll()") // esta anotacion puede ir aca o a nivel de clase o en el servicio
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")  // puede usra un and , or etc
+	@PreAuthorize("permitAll()") // esta anotacion puede ir aca o a nivel de clase o en el servicio
+	//@PreAuthorize("hasRole('ROLE_USER')")  // puede usra un and , or etc "hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')"
 	@GetMapping("/contactform")
 	public String redirectContactForm(@RequestParam(name="id", required =false) int id,
 			Model model) {
